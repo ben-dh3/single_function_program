@@ -1,9 +1,14 @@
+# discovery debugging: investigate by using print statements
+# what the program is doing ("getting visability").
+
 def encode(text, key):
+    print(text, key)
     cipher = make_cipher(key)
 
     ciphertext_chars = []
     for i in text:
         ciphered_char = chr(65 + cipher.index(i))
+        print(ciphered_char)
         ciphertext_chars.append(ciphered_char)
 
     return "".join(ciphertext_chars)
@@ -14,7 +19,8 @@ def decode(encrypted, key):
 
     plaintext_chars = []
     for i in encrypted:
-        plain_char = cipher[65 - ord(i)]
+        plain_char = cipher[ord(i) - 65]
+        print(plain_char)
         plaintext_chars.append(plain_char)
 
     return "".join(plaintext_chars)
@@ -41,8 +47,8 @@ Expected: EMBAXNKEKSYOVQTBJSWBDEMBPHZGJSL
 Actual: {encode('theswiftfoxjumpedoverthelazydog', 'secretkey')}
 """)
 
-# print(f"""
-# Running: decode("EMBAXNKEKSYOVQTBJSWBDEMBPHZGJSL", "secretkey")
-# Expected: theswiftfoxjumpedoverthelazydog
-# Actual: {decode('EMBAXNKEKSYOVQTBJSWBDEMBPHZGJSL', 'secretkey')}
-# """)
+print(f"""
+Running: decode("EMBAXNKEKSYOVQTBJSWBDEMBPHZGJSL", "secretkey")
+Expected: theswiftfoxjumpedoverthelazydog
+Actual: {decode('EMBAXNKEKSYOVQTBJSWBDEMBPHZGJSL', 'secretkey')}
+""")
